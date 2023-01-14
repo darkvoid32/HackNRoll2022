@@ -16,8 +16,8 @@ const PlaceList: NextPage<Props> = (props) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [display, setDisplay] = useState(false);
-  const [displayContent, setDisplayContent] = useState('');
   const [displayHeader, setDisplayHeader] = useState('');
+  const [currPlaces, setCurrPlaces] = useState(places);
 
   const options = [
     { label: 'Sightseeing', value: 0 },
@@ -27,8 +27,25 @@ const PlaceList: NextPage<Props> = (props) => {
   ];
 
   const handlePopUp = (show: boolean) => {
-    setDisplayContent('Place');
-    setDisplayHeader('Add Place');
+    let category = "";
+    switch(activeIndex) {
+      case 0:
+        category = "Sightseeing";
+        break;
+      case 1:
+        category = "Food";
+        break;
+      case 2:
+        category = "Activities";
+        break;
+      case 3:
+        category = "Others";
+        break;
+      default:
+        category = "";
+        break;
+    }
+    setDisplayHeader(category);
     setDisplay(show);
   }
 
@@ -36,10 +53,14 @@ const PlaceList: NextPage<Props> = (props) => {
     handlePopUp(true);
   }
 
+  const addNewPlace = (data: { name: string; notes: string; category: string }) => {
+    setCurrPlaces(currPlaces.concat(data));
+  }
+
   return (
     <div className='mt-10 pt-4 select-none'>
       <div className="flex items-center justify-center mx-5">
-        <PopUpDialog display={display} header={displayHeader} content={displayContent} handlePopUp={handlePopUp}></PopUpDialog>
+        <PopUpDialog display={display} header={displayHeader} handlePopUp={handlePopUp} addNewPlace={addNewPlace}></PopUpDialog>
         <p className='text-lg font-bold'>Places</p>
         <div className='flex-grow'></div>
         <SelectButton value={activeIndex} options={options} unselectable={false} onChange={(e) => setActiveIndex(e.value)}></SelectButton>
@@ -49,7 +70,7 @@ const PlaceList: NextPage<Props> = (props) => {
       <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
         <TabPanel header="Sightseeing">
           <div className="grid grid-cols-4 gap-4">
-            {places.filter((obj) => {
+            {currPlaces.filter((obj) => {
               return obj.category == "SIGHTSEEING"
             }).map((obj) => (
               <PlaceCard key={obj.name} name={obj.name} notes={obj.notes}></PlaceCard>
@@ -58,7 +79,7 @@ const PlaceList: NextPage<Props> = (props) => {
         </TabPanel>
         <TabPanel header="Food">
           <div className="grid grid-cols-4 gap-4">
-            {places.filter((obj) => {
+            {currPlaces.filter((obj) => {
               return obj.category == "FOOD"
             }).map((obj) => (
               <PlaceCard key={obj.name} name={obj.name} notes={obj.notes}></PlaceCard>
@@ -67,7 +88,7 @@ const PlaceList: NextPage<Props> = (props) => {
         </TabPanel>
         <TabPanel header="Activities">
           <div className="grid grid-cols-4 gap-4">
-            {places.filter((obj) => {
+            {currPlaces.filter((obj) => {
               return obj.category == "ACTIVITIES"
             }).map((obj) => (
               <PlaceCard key={obj.name} name={obj.name} notes={obj.notes}></PlaceCard>
@@ -76,7 +97,7 @@ const PlaceList: NextPage<Props> = (props) => {
         </TabPanel>
         <TabPanel header="Others">
           <div className="grid grid-cols-4 gap-4">
-            {places.filter((obj) => {
+            {currPlaces.filter((obj) => {
               return obj.category == "OTHERS"
             }).map((obj) => (
               <PlaceCard key={obj.name} name={obj.name} notes={obj.notes}></PlaceCard>

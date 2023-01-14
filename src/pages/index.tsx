@@ -1,12 +1,27 @@
 import { NextPage } from "next"
 
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+
+import SampleData from "./api/plans.json";
+
 const Home: NextPage = () => {
+  const plans = SampleData.Plans;
+
   return (
-    <>
-      <main>
-        <p className="text-3xl font-bold underline">Hello World</p>
-      </main>
-    </>
+    <main>
+      <div>
+        <DataTable selectionMode="single" value={plans} responsiveLayout="scroll"
+          onRowClick={(event) => {
+            window.location.href = "/plans/" + event.data.id;
+          }}
+        >
+          <Column field="title" header="Title"></Column>
+          <Column field="startDate" header="Start Date"></Column>
+          <Column field="endDate" header="End Date"></Column>
+        </DataTable>
+      </div>
+    </main >
   )
 }
 

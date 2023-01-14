@@ -5,7 +5,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { SelectButton } from 'primereact/selectbutton';
 import { useState } from 'react';
 import { Button } from 'primereact/button';
-import PopUpDialog from './popupDialog';
+import PopUpDialog from './popUpDialog';
 
 interface Props {
   places: { name: string; notes: string; category: string; }[];
@@ -26,7 +26,7 @@ const PlaceList: NextPage<Props> = (props) => {
     { label: 'Others', value: 3 },
   ];
 
-  const handlePopUp = (show : boolean) => {
+  const handlePopUp = (show: boolean) => {
     setDisplayContent('Place');
     setDisplayHeader('Add Place');
     setDisplay(show);
@@ -39,7 +39,7 @@ const PlaceList: NextPage<Props> = (props) => {
   return (
     <div className='mt-10 pt-4 select-none'>
       <div className="flex items-center justify-center mx-5">
-      <PopUpDialog display={display} header={displayHeader} content={displayContent} handlePopUp={handlePopUp}></PopUpDialog>
+        <PopUpDialog display={display} header={displayHeader} content={displayContent} handlePopUp={handlePopUp}></PopUpDialog>
         <p className='text-lg font-bold'>Places</p>
         <div className='flex-grow'></div>
         <SelectButton value={activeIndex} options={options} unselectable={false} onChange={(e) => setActiveIndex(e.value)}></SelectButton>

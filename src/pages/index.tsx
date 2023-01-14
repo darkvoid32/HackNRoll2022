@@ -1,16 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import { NextPage } from "next"
 
-import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
-import "primereact/resources/primereact.min.css";                  //core css
-import "primeicons/primeicons.css";
-
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <main>
-        Hello World
+        <p className="text-3xl font-bold underline">Hello World</p>
       </main>
     </>
   )
 }
+
+export default Home;

@@ -19,12 +19,8 @@ const TimeLine: NextPage<Props> = (props) => {
   }
 
   return (
-    <div>
-      <p>Timeline</p>
-      <p>Days: {props.dates.length}</p>
-      <div className="grid grid-cols-4 gap-4">
-        {dayCards(props.dates)}
-      </div>
+    <div className="flex gap-4">
+      {dayCards(props.dates)}
     </div>
   );
 };

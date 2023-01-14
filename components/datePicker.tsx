@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 import { NextPage } from "next";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const DatePicker: NextPage<Props> = (props) => {
-  const {value, onChange} = props;
+  const { value, onChange } = props;
 
   return (
     <div>

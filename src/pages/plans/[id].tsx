@@ -17,8 +17,6 @@ const Plan = () => {
 
   const plan = SampleData.Plans.at(id);
 
-  const [dateRange, setDateRange] = useState<Date[]>()
-
   var tem = new Array();
   var startDate = new Date(plan!.startDate);
   var endDate = new Date(plan!.endDate);
@@ -31,14 +29,6 @@ const Plan = () => {
     <main>
       <DndProvider backend={HTML5Backend}>
         <div>
-          <p>Select Dates</p>
-          <Calendar
-            selectionMode="single"
-            value={dateRange}
-            onChange={(e: CalendarChangeParams) => {
-              setDateRange(e.value as Date[]);
-            }}>
-          </Calendar>
           <TimeLine dates={tem}></TimeLine>
         </div>
         <div style={{ boxShadow: "0px -5px 33px -13px rgba(0,0,0,0.75)", position: "sticky", bottom: "0", backgroundColor: "white" }}>

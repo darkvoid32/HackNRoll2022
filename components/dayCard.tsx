@@ -28,7 +28,7 @@ const DayCard: NextPage<Props> = (props) => {
   }
 
   return (
-    <div>
+    <div className="flex-auto">
       <DataTable value={timeline} showGridlines responsiveLayout="scroll">
         <Column field="time" header={date!.toLocaleDateString()} style={{ padding: '5px', width: '10px' }}></Column>
         <Column field="place" style={{ padding: '5px' }} body={bodyTemplate}></Column>

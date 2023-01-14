@@ -3,22 +3,19 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { NextPage } from "next";
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { notStrictEqual } from 'assert';
 
 interface Props {
   display: boolean;
   header: string,
-  content: string;
   handlePopUp: (show: boolean) => void;
   addNewPlace: (data: { name: string; notes: string; category: string; }) => void;
 }
 
 const PopUpDialog: NextPage<Props> = (props) => {
-  const { display, header, content, handlePopUp, addNewPlace } = props;
-
-  const [formData, setFormData] = useState({});
+  const { display, header, handlePopUp, addNewPlace } = props;
 
   const defaultValues = {
     place: '',
@@ -28,7 +25,24 @@ const PopUpDialog: NextPage<Props> = (props) => {
   const { control, formState: { errors }, handleSubmit } = useForm({ defaultValues });
 
   const onSubmit = (data: { place: string; description: string; }) => {
-    addNewPlace({name: data.place, notes: data.description, category: "SIGHTSEEING"});
+    let category = "";
+    switch (header) {
+      case "Sightseeing":
+        category = "SIGHTSEEING";
+        break;
+      case "Food":
+        category = "FOOD";
+        break;
+      case "Activities":
+        category = "ACTIVITIES";
+        break;
+      case "Others":
+        category = "OTHERS";
+        break;
+      default:
+        break;
+    }
+    addNewPlace({ name: data.place, notes: data.description, category: category });
     hidePopUp();
   };
 
@@ -51,33 +65,26 @@ const PopUpDialog: NextPage<Props> = (props) => {
 
   return (
     <Dialog header={header} visible={display} style={{ width: '50vw' }} footer={renderFooter} onHide={hidePopUp}>
-      {(() => {
-        switch (content) {
-          case 'Place':
-            return <div className="grid p-fluid">
-              <div className="field py-3">
-                <span className="p-float-label">
-                  <Controller name="place" control={control} rules={{ required: 'Place is required.' }} render={({ field, fieldState }) => (
-                    <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
-                  )} />
-                  <label htmlFor="place" className={classNames({ 'p-error': errors.place })}>Place*</label>
-                </span>
-                {/* {getFormErrorMessage('name')} */}
-              </div>
+      <div className="grid p-fluid">
+        <div className="field py-3">
+          <span className="p-float-label">
+            <Controller name="place" control={control} rules={{ required: 'Place is required.' }} render={({ field, fieldState }) => (
+              <InputText id={field.name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+            )} />
+            <label htmlFor="place" className={classNames({ 'p-error': errors.place })}>Place*</label>
+          </span>
+          {/* {getFormErrorMessage('name')} */}
+        </div>
 
-              <div className="field py-3">
-                <span className="p-float-label">
-                  <Controller name="description" control={control} render={({ field }) => (
-                    <InputText id={field.name} {...field} autoFocus />
-                  )} />
-                  <label htmlFor="description">Description</label>
-                </span>
-              </div>
-            </div>
-          default:
-            return null
-        }
-      })()}
+        <div className="field py-3">
+          <span className="p-float-label">
+            <Controller name="description" control={control} render={({ field }) => (
+              <InputText id={field.name} {...field} autoFocus />
+            )} />
+            <label htmlFor="description">Description</label>
+          </span>
+        </div>
+      </div>
     </Dialog>
   )
 };

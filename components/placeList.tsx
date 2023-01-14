@@ -16,8 +16,6 @@ const PlaceList: NextPage<Props> = (props) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [display, setDisplay] = useState(false);
-  const [category, setCategory] = useState(0);
-  const [displayContent, setDisplayContent] = useState('');
   const [displayHeader, setDisplayHeader] = useState('');
   const [currPlaces, setCurrPlaces] = useState(places);
 
@@ -29,8 +27,25 @@ const PlaceList: NextPage<Props> = (props) => {
   ];
 
   const handlePopUp = (show: boolean) => {
-    setDisplayContent('Place');
-    setDisplayHeader('Add Place');
+    let category = "";
+    switch(activeIndex) {
+      case 0:
+        category = "Sightseeing";
+        break;
+      case 1:
+        category = "Food";
+        break;
+      case 2:
+        category = "Activities";
+        break;
+      case 3:
+        category = "Others";
+        break;
+      default:
+        category = "";
+        break;
+    }
+    setDisplayHeader(category);
     setDisplay(show);
   }
 
@@ -38,14 +53,14 @@ const PlaceList: NextPage<Props> = (props) => {
     handlePopUp(true);
   }
 
-  const addNewPlace = (data: { name: string; notes: string; category: string}) => {
+  const addNewPlace = (data: { name: string; notes: string; category: string }) => {
     setCurrPlaces(currPlaces.concat(data));
   }
 
   return (
     <div className='mt-10 pt-4 select-none'>
       <div className="flex items-center justify-center mx-5">
-        <PopUpDialog display={display} header={displayHeader} content={displayContent} handlePopUp={handlePopUp} addNewPlace={addNewPlace}></PopUpDialog>
+        <PopUpDialog display={display} header={displayHeader} handlePopUp={handlePopUp} addNewPlace={addNewPlace}></PopUpDialog>
         <p className='text-lg font-bold'>Places</p>
         <div className='flex-grow'></div>
         <SelectButton value={activeIndex} options={options} unselectable={false} onChange={(e) => setActiveIndex(e.value)}></SelectButton>

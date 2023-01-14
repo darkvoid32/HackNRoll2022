@@ -1,3 +1,4 @@
+import PlaceList from 'components/placelist';
 import { useRouter } from 'next/router'
 
 import SampleData from "../api/plans.json";
@@ -14,6 +15,8 @@ const Plan = () => {
     <main>
       <div>
         <p>{JSON.stringify(plan)}</p>
+
+        {plan ? <PlaceList places={plan.Locations}></PlaceList> : null}
       </div>
     </main >
   )

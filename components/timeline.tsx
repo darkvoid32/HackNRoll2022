@@ -9,7 +9,7 @@ const TimeLine: NextPage<Props> = (props) => {
   const dayCards = (days: number) => {
     let content = []
     for (let i = 0; i < days; i++) {
-      content.push(<DayCard key={i} name={i + ''}></DayCard>);
+      content.push(<DayCard key={i} date={new Date()}></DayCard>);
     }
     return content;
   }
@@ -17,6 +17,7 @@ const TimeLine: NextPage<Props> = (props) => {
   return (
     <div>
       <p>Timeline</p>
+      <p>Days: {props.daysNum}</p>
       <div className="grid grid-cols-4 gap-4">
         {dayCards(props.daysNum)}
       </div>

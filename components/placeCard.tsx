@@ -1,10 +1,15 @@
 import { NextPage } from "next";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button'
+import { useDrag } from "react-dnd";
 
 interface Props {
   name: string;
   notes: string;
+}
+
+export const ItemTypes = {
+  PLACE: 'place'
 }
 
 const PlaceCard: NextPage<Props> = (props) => {
@@ -19,10 +24,19 @@ const PlaceCard: NextPage<Props> = (props) => {
     <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-text" aria-label="Cancel" />
   </div>
 
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.PLACE,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging()
+    })
+  }))
+
   return (
-    <Card title={title} footer={footer}>
-      <p>{notes}</p>
-    </Card>
+    <div ref={drag}>
+      <Card title={title} footer={footer}>
+        <p>{notes}</p>
+      </Card>
+    </div>
   )
 };
 

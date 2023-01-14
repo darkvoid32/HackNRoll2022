@@ -6,6 +6,9 @@ import { useState } from 'react';
 
 import SampleData from "../api/plans.json";
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 const Plan = () => {
   const router = useRouter()
   const { pid } = router.query
@@ -18,12 +21,16 @@ const Plan = () => {
 
   return (
     <main>
-      <div>
-        <p>Select Days</p>
-        <DatePicker getDaysNum={setDaysNum}></DatePicker>
-        <TimeLine daysNum={daysNum}></TimeLine>
-      </div>
-      {plan ? <PlaceList places={plan.Locations}></PlaceList> : null}
+      <DndProvider backend={HTML5Backend}>
+        <div>
+          <p>Select Days</p>
+          <DatePicker getDaysNum={setDaysNum}></DatePicker>
+          <TimeLine daysNum={4}></TimeLine>
+        </div>
+        <div className='sticky bottom-0 bg-white' style={{ boxShadow: "0px -5px 33px -13px rgba(0,0,0,0.75);" }}>
+          {plan ? <PlaceList places={plan.Locations}></PlaceList> : null}
+        </div>
+      </DndProvider>
     </main >
   )
 }

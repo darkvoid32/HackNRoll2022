@@ -23,7 +23,7 @@ const PlaceList: NextPage<Props> = (props) => {
   ];
 
   return (
-    <div className='mt-10'>
+    <div className='mt-10 pt-4 select-none'>
       <div className="flex items-center justify-center mx-5">
         <p className='text-lg font-bold'>Places</p>
         <div className='flex-grow'></div>

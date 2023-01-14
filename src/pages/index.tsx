@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <main>
       <div>
-        <DataTable selectionMode="single" value={plans} responsiveLayout="scroll"
+        <DataTable selectionMode="single" value={plans} scrollable scrollHeight="400px"
           onRowClick={(event) => {
             window.location.href = "/plans/" + event.data.id;
           }}

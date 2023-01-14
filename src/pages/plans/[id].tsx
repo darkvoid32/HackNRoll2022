@@ -41,7 +41,7 @@ const Plan = () => {
           </Calendar>
           <TimeLine dates={tem}></TimeLine>
         </div>
-        <div className='sticky bottom-0 bg-white' style={{ boxShadow: "0px -5px 33px -13px rgba(0,0,0,0.75)" }}>
+        <div style={{ boxShadow: "0px -5px 33px -13px rgba(0,0,0,0.75)", position: "sticky", bottom: "0", backgroundColor: "white" }}>
           {plan ? <PlaceList places={plan.Locations}></PlaceList> : null}
         </div>
       </DndProvider>

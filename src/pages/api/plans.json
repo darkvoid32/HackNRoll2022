@@ -3,8 +3,8 @@
     {
       "id": "0",
       "title": "Plan 1",
-      "startDate": "",
-      "endDate": "",
+      "startDate": "2023-01-14",
+      "endDate": "2023-01-16",
       "Locations": [
         {
           "name": "Food Place 1",

@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import TimelineDrop from "./timelineDrop";
+import dynamic from 'next/dynamic';
 
 interface Props {
   date: Date | undefined;
@@ -29,7 +30,7 @@ const DayCard: NextPage<Props> = (props) => {
   return (
     <div>
       <DataTable value={timeline} showGridlines responsiveLayout="scroll">
-        <Column field="time" header={date?.toLocaleDateString()} style={{ padding: '5px', width: '10px' }}></Column>
+        <Column field="time" header={date!.toLocaleDateString()} style={{ padding: '5px', width: '10px' }}></Column>
         <Column field="place" style={{ padding: '5px' }} body={bodyTemplate}></Column>
       </DataTable>
     </div>

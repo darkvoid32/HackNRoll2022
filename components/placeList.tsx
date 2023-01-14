@@ -1,4 +1,4 @@
-import PlaceCard from './placecard';
+import PlaceCard from './placeCard';
 import { NextPage } from 'next';
 
 import { TabView, TabPanel } from 'primereact/tabview';

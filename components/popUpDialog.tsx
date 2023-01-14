@@ -4,7 +4,7 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { NextPage } from "next";
 import React, { useState } from 'react';
-import { useForm, Controller, FieldErrorsImpl, FieldValue, FieldValues } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 interface Props {
   display: boolean;

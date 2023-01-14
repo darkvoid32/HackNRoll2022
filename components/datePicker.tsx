@@ -1,22 +1,24 @@
 import React, { ChangeEvent, useState } from 'react';
-
+import { NextPage } from "next";
 import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
-export default function DatePicker(props: { getDaysNum: (arg0: number) => void; }) {
-  let [daysNum, setDaysNum] = useState(0)
-  let [dates, setDates] = useState([new Date])
+interface Props {
+  value: Date | undefined;
+  onChange: (e: CalendarChangeParams) => void;
+}
 
-  const handleDateChange = (e: CalendarChangeParams) => {
-    setDates(e.value as Date[]);
-  }
+const DatePicker: NextPage<Props> = (props) => {
+  const {value, onChange} = props;
 
   return (
     <div>
       <Calendar
-        selectionMode="range"
-        value={dates}
-        onChange={handleDateChange}>
+        selectionMode="single"
+        value={value}
+        onChange={onChange}>
       </Calendar>
     </div>
   );
 }
+
+export default DatePicker;

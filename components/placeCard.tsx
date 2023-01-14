@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button'
-import { useDrag } from "react-dnd";
+import { DragPreviewImage, useDrag } from "react-dnd";
 
 interface Props {
   name: string;
@@ -26,17 +26,20 @@ const PlaceCard: NextPage<Props> = (props) => {
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.PLACE,
+    item: { name },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })
   }))
 
   return (
-    <div ref={drag}>
-      <Card title={title} footer={footer}>
-        <p>{notes}</p>
-      </Card>
-    </div>
+    <>
+      <div ref={drag}>
+        <Card title={title} footer={footer} style={{ opacity: isDragging ? 0.5 : 1 }}>
+          <p >{notes}</p>
+        </Card>
+      </div>
+    </>
   )
 };
 

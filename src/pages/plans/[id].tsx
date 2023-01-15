@@ -1,13 +1,11 @@
 import PlaceList from 'components/placeList';
 import TimeLine from 'components/timeline';
 import { useRouter } from 'next/router'
-import { useState } from 'react';
 
 import SampleData from "../api/plans.json";
 
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { Calendar, CalendarChangeParams } from 'primereact/calendar';
 
 const Plan = () => {
   const router = useRouter()
@@ -26,16 +24,15 @@ const Plan = () => {
   }
 
   return (
-    <main>
-      <DndProvider backend={HTML5Backend}>
-        <div>
-          <TimeLine dates={tem}></TimeLine>
-        </div>
-        <div style={{ boxShadow: "0px -5px 33px -13px rgba(0,0,0,0.75)", position: "sticky", bottom: "0", backgroundColor: "white" }}>
-          {plan ? <PlaceList places={plan.Locations}></PlaceList> : null}
-        </div>
-      </DndProvider>
-    </main >
+    <DndProvider backend={HTML5Backend}>
+      <div style={{ fontWeight: "400", fontSize: "30px" }}>{plan?.title}</div>
+      <div>
+        <TimeLine dates={tem}></TimeLine>
+      </div>
+      <div style={{ boxShadow: "0 -5px 5px -5px #333", position: "sticky", bottom: "0", backgroundColor: "white" }}>
+        {plan ? <PlaceList places={plan.Locations}></PlaceList> : null}
+      </div>
+    </DndProvider>
   )
 }
 

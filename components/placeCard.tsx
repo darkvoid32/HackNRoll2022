@@ -16,7 +16,7 @@ const PlaceCard: NextPage<Props> = (props) => {
   const { name, notes } = props;
 
   const footer = <div>
-    <Button label="Edit" className="p-button-sm mr-1" />
+    {/* <Button label="Edit" className="p-button-sm mr-1" /> */}
   </div>
 
   const title = <div className='flex justify-between'>
